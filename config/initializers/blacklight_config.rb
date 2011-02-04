@@ -43,6 +43,7 @@ Blacklight.configure(:shared) do |config|
 
   config[:default_solr_params] = {
     :qt => "search",
+    :fl => "*,score",
     :per_page => 10 
   }
   
@@ -51,15 +52,15 @@ Blacklight.configure(:shared) do |config|
 
   # solr field values given special treatment in the show (single result) view
   config[:show] = {
-    :html_title => "title_display",
-    :heading => "title_display",
-    :display_type => "format"
+    :html_title => "filename_display",
+    :heading => "filename_display",
+    :display_type => "libmagic_display"
   }
 
   # solr fld values given special treatment in the index (search results) view
   config[:index] = {
-    :show_link => "title_display",
-    :record_display_type => "format"
+    :show_link => "filename_display",
+    :record_display_type => "libmagic_display"
   }
 
   # solr fields that will be treated as facets by the blacklight application
@@ -69,23 +70,15 @@ Blacklight.configure(:shared) do |config|
   # config[:facet] << {:field_name => "format", :label => "Format", :limit => 10}
   config[:facet] = {
     :field_names => (facet_fields = [
-      "format",
-      "pub_date",
-      "subject_topic_facet",
-      "language_facet",
-      "lc_1letter_facet",
-      "subject_geo_facet",
-      "subject_era_facet"
+      "volume_facet",
+      "extension_facet",
+      "libmagic_facet",
     ]),
     :labels => {
-      "format"              => "Format",
-      "pub_date"            => "Publication Year",
-      "subject_topic_facet" => "Topic",
-      "language_facet"      => "Language",
-      "lc_1letter_facet"    => "Call Number",
-      "subject_era_facet"   => "Era",
-      "subject_geo_facet"   => "Region"
-    },
+        "volume_facet" => "Image File",
+        "extension_facet" => "Extension",
+        "libmagic_facet" => "File Type",
+        },
     # Setting a limit will trigger Blacklight's 'more' facet values link.
     # * If left unset, then all facet values returned by solr will be displayed.
     # * If set to an integer, then "f.somefield.facet.limit" will be added to
@@ -100,8 +93,9 @@ Blacklight.configure(:shared) do |config|
     # sniffing requires solr requests to be made with "echoParams=all", for
     # app code to actually have it echo'd back to see it.     
     :limits => {
-      "subject_facet" => 20,
-      "language_facet" => true
+      "volume_facet" => true,
+      "extension_facet" => true,
+      "libmagic_facet" => true,
     }
   }
 
@@ -115,26 +109,19 @@ Blacklight.configure(:shared) do |config|
   #   The ordering of the field names is the order of the display 
   config[:index_fields] = {
     :field_names => [
-      "title_display",
-      "title_vern_display",
-      "author_display",
-      "author_vern_display",
-      "format",
-      "language_facet",
-      "published_display",
-      "published_vern_display",
-      "lc_callnum_display"
+      "filename_display",
+      "volume_display",
+      "inode_i",
+      "md5_s",
+      "sha1_s"
     ],
     :labels => {
-      "title_display"           => "Title:",
-      "title_vern_display"      => "Title:",
-      "author_display"          => "Author:",
-      "author_vern_display"     => "Author:",
-      "format"                  => "Format:",
-      "language_facet"          => "Language:",
-      "published_display"       => "Published:",
-      "published_vern_display"  => "Published:",
-      "lc_callnum_display"      => "Call number:"
+      "filename_display" => "Filename",
+      "volume_display" => "Image file",
+      "inode_i" => "Inode number",
+      "md5_s" => "MD5",
+      "sha1_s" => "SHA1",
+      
     }
   }
 

@@ -1,0 +1,19 @@
+html, body, #facets, #facets h2, #facets h3 {background: #white none; font-family: "Arial Unicode MS", Arial, Helvetica, sans-serif; color: black;}
+html, body {font-size: 12px;}
+#doc, #doc2, #doc3, #doc4 {background: white none;}
+h1.site_title {background-image: url(../images/shoe.png); margin: 0 0;}
+h1.site_title a {padding-left:40px;}
+dl.defList dd {width: 400px;}
+
+a, a:link, a:active, a:visited {
+color: #029;
+}
+a:hover, #facets li a:hover {color: #920; background:transparent;}
+
+#startOverLink {background: #029 none; border:1px solid #35a;
+-moz-border-radius:15px 15px 15px 15px;
+-webkit-border-radius:15px 15px 15px 15px;
+border-radius: 15px 15px 15px 15px;
+color: #fff;
+padding: 0 1.5em;}
+

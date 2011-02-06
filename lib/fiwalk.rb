@@ -8,22 +8,29 @@ end
 
 class FileObject
   include SAXMachine
-  element :filename
-  element :partition
-  element :id
-  element :name_type
-  element :filesize
   element :alloc
-  element :used
+  element :atime
+  element :compressed
+  element :crtime
+  element :ctime
+  element :dtime
+  element :encrypted
+  element :filename
+  element :filesize
+  element :fragments
+  element :gid
+  element :id
   element :inode
+  element :libmagic
   element :meta_type
   element :mode
-  element :nlink
-  element :uid
-  element :gid
   element :mtime
-  element :atime
-  element :libmagic
+  element :name_type
+  element :nlink
+  element :partition
+  element :uid
+  element :unalloc
+  element :used
   elements :byte_runs, :class => ByteRun
   element :hashdigest, :as => :md5, :with => {:type => "md5"}
   element :hashdigest, :as => :sha1, :with => {:type => "md5"}

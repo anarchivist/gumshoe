@@ -1,0 +1,10 @@
+
+<ul class="tools">
+  <%# broken for now %> 
+  <% if (@document.key?(:contents_display__)) %>
+    <li class="contents_view">
+      <%= link_to "View Contents", librarian_view_catalog_path(@document[:id]), {:id => 'librarianLink', :name => 'librarian_view', :class => 'lightboxLink'} %>
+    </li>
+  <% end %>
+  
+</ul>

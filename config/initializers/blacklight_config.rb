@@ -130,39 +130,21 @@ Blacklight.configure(:shared) do |config|
   config[:show_fields] = {
     :field_names => [
       "title_display",
-      "title_vern_display",
-      "subtitle_display",
-      "subtitle_vern_display",
-      "author_display",
-      "author_vern_display",
-      "format",
-      "url_fulltext_display",
-      "url_suppl_display",
-      "material_type_display",
-      "language_facet",
-      "published_display",
-      "published_vern_display",
-      "lc_callnum_display",
-      "isbn_t"
+      "volume_display",
+      "inode_i",
+      "md5_s",
+      "sha1_s"
     ],
     :labels => {
-      "title_display"           => "Title:",
-      "title_vern_display"      => "Title:",
-      "subtitle_display"        => "Subtitle:",
-      "subtitle_vern_display"   => "Subtitle:",
-      "author_display"          => "Author:",
-      "author_vern_display"     => "Author:",
-      "format"                  => "Format:",
-      "url_fulltext_display"    => "URL:",
-      "url_suppl_display"       => "More Information:",
-      "material_type_display"   => "Physical description:",
-      "language_facet"          => "Language:",
-      "published_display"       => "Published:",
-      "published_vern_display"  => "Published:",
-      "lc_callnum_display"      => "Call number:",
-      "isbn_t"                  => "ISBN:"
+      "title_display" => "Filename",
+      "volume_display" => "Image file",
+      "inode_i" => "Inode number",
+      "md5_s" => "MD5",
+      "sha1_s" => "SHA1",
+      
     }
   }
+
 
 
   # "fielded" search configuration. Used by pulldown among other places.

@@ -5,7 +5,7 @@ h1.site_title {background-image: url(../images/shoe.png); margin: 0 0;}
 h1.site_title a {padding-left:40px;}
 h3.index_title {font-size: 100%;}
 dl.defList dd {width: 400px;}
-#search, #appliedParams, .pageEntriesInfo, #sortAndPerPage, .pagination {
+#search, #appliedParams, .show #appliedParams, .pageEntriesInfo, #sortAndPerPage, .pagination, #previousNextDocument {
     background: white none;
     border: 0;
 }

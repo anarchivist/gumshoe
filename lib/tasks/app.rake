@@ -16,6 +16,7 @@ namespace :app do
     desc "Index output from fiwalk"
     task :fiwalk => :environment do
       solr = Blacklight.solr
+      #solr = RSolr.connect :url => 'http://localhost:8983/solr'
     
       input_file = require_env_file
       if input_file =~ /\*/

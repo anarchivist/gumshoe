@@ -1,5 +1,5 @@
 production:
-    url: http://127.0.0.1:8983/solr
+    url: http://67.23.4.141:8983/solr
 development:
     url: http://127.0.0.1:8983/solr
 test: &TEST

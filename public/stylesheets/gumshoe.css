@@ -1,6 +1,6 @@
 html, body, #facets, #facets h2, #facets h3 {background: #white none; font-family: "Arial Unicode MS", Arial, Helvetica, sans-serif; color: black;}
 html, body {font-size: 12px;}
-#doc, #doc2, #doc3, #doc4, #search, #appliedParams, .show #appliedParams, .pageEntriesInfo, #sortAndPerPage, .pagination, #previousNextDocument {background: white none; border:; 0;}
+#doc, #doc2, #doc3, #doc4, #search, #appliedParams, .show #appliedParams, .pageEntriesInfo, #sortAndPerPage, .pagination, #previousNextDocument {background: white none; border: 0;}
 h1.site_title {background-image: url(../images/shoe.png); margin: 0 0;}
 h1.site_title a {padding-left:40px;}
 h3.index_title {font-size: 100%;}

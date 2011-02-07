@@ -6,6 +6,11 @@ def to_b(v)
   return [true, "true", 1, "1", "T", "t"].include?(v.class == String ? v.downcase : v)
 end
 
+def path p
+   path = p.split('/')
+   path[0..-2].join('/')
+end
+
 class FiwalkMapper
   attr :filename
   attr :file_id
@@ -20,7 +25,7 @@ class FiwalkMapper
   end
   
   def val_to_id(v)
-    v.downcase.gsub('\s+', '_').gsub(/\W+/, '').gsub(/ /, '').gsub(/\.xml/, '').gsub(/^ +| $/, '')
+    v.downcase.gsub('\s+', '_').gsub(/\W+/, '_').gsub(/ /, '_').gsub(/\.xml/, '').gsub(/^ +| $/, '')
   end
   
   def shaify(v, w)
@@ -48,16 +53,14 @@ class FiwalkMapper
           :ctime_dt => unepoch(fileobject.ctime),
           :dtime_dt => unepoch(fileobject.dtime),
           :encrypted_b => to_b(fileobject.encrypted), 
-          #:extension_facet': fo.ext(),
+          :extension_facet => File.extname(fileobject.filename),
           :fileid_i => fileobject.fileid.to_i,
           :filename_display => fileobject.filename.to_s,
           :filename_t => fileobject.filename.to_s,
           :filesize_i => fileobject.filesize.to_i,
           :fragments_i => fileobject.fragments.to_i,
           :gid_i => fileobject.gid.to_i,
-          #'id': uuid.uuid4(),
           :id => shaify(@file_id, fileobject.inode),
-          #'imagefile': fo._tags['imagefile'],
           :inode_i => fileobject.inode.to_i,
           :libmagic_display => fileobject.libmagic,
           :libmagic_facet => fileobject.libmagic,
@@ -69,6 +72,8 @@ class FiwalkMapper
           :nlink_i => fileobject.nlink.to_i,
           :name_type_s => fileobject.name_type,
           :partition_i => fileobject.partition.to_i,
+          :path_facet => path(fileobject.filename),
+          :path_s => path(fileobject.filename),
           :sha1_s => fileobject.sha1,
           :uid_i => fileobject.uid.to_i,
           :volume_display => @file_id,

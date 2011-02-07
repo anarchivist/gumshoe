@@ -12,5 +12,3 @@ config/SolrMarc/*.log*
 rerun.txt
 solr_marc/solrmarc.log
 *.log
-pachs-data
-pachs-data/*

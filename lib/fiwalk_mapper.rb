@@ -2,13 +2,36 @@ require 'lib/fiwalk'
 require 'digest/sha1'
 require 'time'
 
+Ftypes = {
+  '-' => 'Unknown type',
+  'r' => 'Regular file',
+  'd' => 'Directory',
+  'c' => 'Character device',
+  'b' => 'Block device',
+  'l' => 'Symbolic link',
+  'p' => 'Named FIFO',
+  's' => 'Shadow',
+  'h' => 'Socket',
+  'w' => 'Whiteout',
+  'v' => 'TSK Virtual file',
+}
+
 def to_b(v)
   return [true, "true", 1, "1", "T", "t"].include?(v.class == String ? v.downcase : v)
+end
+
+def ext e
+  return '(None)' if File.extname(e).empty?
+  File.extname(e)
 end
 
 def path p
    path = p.split('/')
    path[0..-2].join('/')
+end
+
+def ftype t
+  Ftypes[t]
 end
 
 class FiwalkMapper
@@ -53,10 +76,12 @@ class FiwalkMapper
           :ctime_dt => unepoch(fileobject.ctime),
           :dtime_dt => unepoch(fileobject.dtime),
           :encrypted_b => to_b(fileobject.encrypted), 
-          :extension_facet => File.extname(fileobject.filename),
+          :extension_facet => ext(fileobject.filename),
           :fileid_i => fileobject.fileid.to_i,
-          :filename_display => fileobject.filename.to_s,
-          :filename_t => fileobject.filename.to_s,
+          :filename_display => File.basename(fileobject.filename.to_s),
+          :filename_full_display => '/' + fileobject.filename.to_s,
+          :filename_sort => '/' + fileobject.filename.to_s,
+          :filename_t => '/' + fileobject.filename.to_s,
           :filesize_i => fileobject.filesize.to_i,
           :fragments_i => fileobject.fragments.to_i,
           :gid_i => fileobject.gid.to_i,
@@ -70,10 +95,10 @@ class FiwalkMapper
           :mode_s => fileobject.mode,
           :mtime_dt => unepoch(fileobject.mtime),
           :nlink_i => fileobject.nlink.to_i,
-          :name_type_s => fileobject.name_type,
+          :name_type_s => ftype(fileobject.name_type),
           :partition_i => fileobject.partition.to_i,
           :path_facet => path(fileobject.filename),
-          :path_s => path(fileobject.filename),
+          :path_s => '/' + path(fileobject.filename),
           :sha1_s => fileobject.sha1,
           :uid_i => fileobject.uid.to_i,
           :volume_display => @file_id,

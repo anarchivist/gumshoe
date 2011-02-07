@@ -4,11 +4,12 @@ db/*.sqlite3
 db/schema.rb
 jetty/logs/*.log
 jetty/solr/data/*
-log/*
+log/*.log
 webrat-*
-public/*sitemap*.xml
 public/plugin_assets
 config/SolrMarc/*.log*
 rerun.txt
 solr_marc/solrmarc.log
 *.log
+images
+images/*

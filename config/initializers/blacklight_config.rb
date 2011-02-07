@@ -53,13 +53,13 @@ Blacklight.configure(:shared) do |config|
   # solr field values given special treatment in the show (single result) view
   config[:show] = {
     :html_title => "filename_display",
-    :heading => "filename_display",
+    :heading => "filename_full_display",
     :display_type => "libmagic_display"
   }
 
   # solr fld values given special treatment in the index (search results) view
   config[:index] = {
-    :show_link => "filename_display",
+    :show_link => "filename_full_display",
     :record_display_type => "libmagic_display"
   }
 
@@ -73,11 +73,13 @@ Blacklight.configure(:shared) do |config|
       "volume_facet",
       "extension_facet",
       "libmagic_facet",
+      "name_type_s",
     ]),
     :labels => {
         "volume_facet" => "Image File",
         "extension_facet" => "Extension",
-        "libmagic_facet" => "File Type",
+        "libmagic_facet" => "Format",
+        "name_type_s" => "Type",
         },
     # Setting a limit will trigger Blacklight's 'more' facet values link.
     # * If left unset, then all facet values returned by solr will be displayed.
@@ -93,9 +95,10 @@ Blacklight.configure(:shared) do |config|
     # sniffing requires solr requests to be made with "echoParams=all", for
     # app code to actually have it echo'd back to see it.     
     :limits => {
-      "volume_facet" => true,
-      "extension_facet" => true,
-      "libmagic_facet" => true,
+      "volume_facet" => 10,
+      "extension_facet" => 10,
+      "libmagic_facet" => 10,
+      "name_type_s" => 10,
     }
   }
 
@@ -110,18 +113,35 @@ Blacklight.configure(:shared) do |config|
   config[:index_fields] = {
     :field_names => [
       "filename_display",
+      "path_s",
       "volume_display",
+      "name_type_s",
+      "filesize_i",
       "inode_i",
       "md5_s",
-      "sha1_s"
+      "sha1_s",
+      "libmagic_display",
+      "mtime_dt",
+      "atime_dt",
+      "ctime_dt",
+      "crtime_dt",
+      "dtime_dt",
     ],
     :labels => {
       "filename_display" => "Filename",
+      "path_s" => "Full Path",
       "volume_display" => "Image file",
+      "name_type_s" => "Type",
+      "filesize_i" => "Size (bytes)",
       "inode_i" => "Inode number",
       "md5_s" => "MD5",
       "sha1_s" => "SHA1",
-      
+      "libmagic_display" => "Format (libmagic)",
+      "mtime_dt" => 'Modification Time',
+      "atime_dt" => 'Access Time',
+      "ctime_dt" => 'Change Time',
+      "crtime_dt" => 'Creation Time',
+      "dtime_dt" => 'Deletion Time'
     }
   }
 
@@ -129,19 +149,42 @@ Blacklight.configure(:shared) do |config|
   #   The ordering of the field names is the order of the display 
   config[:show_fields] = {
     :field_names => [
-      "title_display",
+      "filename_display",
+      "path_s",
       "volume_display",
+      "name_type_s",
+      "filesize_i",
       "inode_i",
       "md5_s",
-      "sha1_s"
+      "sha1_s",
+      "libmagic_display",
+      "mtime_dt",
+      "atime_dt",
+      "ctime_dt",
+      "crtime_dt",
+      "dtime_dt",
+      "uid_i",
+      "gid_i",
+      "mode_s"
     ],
     :labels => {
-      "title_display" => "Filename",
+      "filename_display" => "Filename",
+      "path_s" => "Full Path",
       "volume_display" => "Image file",
+      "name_type_s" => "Type",
+      "filesize_i" => "Size (bytes)",
       "inode_i" => "Inode number",
       "md5_s" => "MD5",
       "sha1_s" => "SHA1",
-      
+      "libmagic_display" => "Type (libmagic)",
+      "mtime_dt" => 'Modification Time',
+      "atime_dt" => 'Access Time',
+      "ctime_dt" => 'Change Time',
+      "crtime_dt" => 'Creation Time',
+      "dtime_dt" => 'Deletion Time',
+      "uid_i" => 'User ID',
+      "gid_i" => 'Group ID',
+      "mode_s" => 'Mode'
     }
   }
 
@@ -173,46 +216,46 @@ Blacklight.configure(:shared) do |config|
   # Now we see how to over-ride Solr request handler defaults, in this
   # case for a BL "search field", which is really a dismax aggregate
   # of Solr search fields. 
-  config[:search_fields] << {
-    :key => 'title',     
-    # solr_parameters hash are sent to Solr as ordinary url query params. 
-    :solr_parameters => {
-      :"spellcheck.dictionary" => "title"
-    },
-    # :solr_local_parameters will be sent using Solr LocalParams
-    # syntax, as eg {! qf=$title_qf }. This is neccesary to use
-    # Solr parameter de-referencing like $title_qf.
-    # See: http://wiki.apache.org/solr/LocalParams
-    :solr_local_parameters => {
-      :qf => "$title_qf",
-      :pf => "$title_pf"
-    }
-  }
-  config[:search_fields] << {
-    :key =>'author',     
-    :solr_parameters => {
-      :"spellcheck.dictionary" => "author" 
-    },
-    :solr_local_parameters => {
-      :qf => "$author_qf",
-      :pf => "$author_pf"
-    }
-  }
+  # config[:search_fields] << {
+  #   :key => 'title',     
+  #   # solr_parameters hash are sent to Solr as ordinary url query params. 
+  #   :solr_parameters => {
+  #     :"spellcheck.dictionary" => "title"
+  #   },
+  #   # :solr_local_parameters will be sent using Solr LocalParams
+  #   # syntax, as eg {! qf=$title_qf }. This is neccesary to use
+  #   # Solr parameter de-referencing like $title_qf.
+  #   # See: http://wiki.apache.org/solr/LocalParams
+  #   :solr_local_parameters => {
+  #     :qf => "$title_qf",
+  #     :pf => "$title_pf"
+  #   }
+  # }
+  # config[:search_fields] << {
+  #   :key =>'author',     
+  #   :solr_parameters => {
+  #     :"spellcheck.dictionary" => "author" 
+  #   },
+  #   :solr_local_parameters => {
+  #     :qf => "$author_qf",
+  #     :pf => "$author_pf"
+  #   }
+  # }
 
   # Specifying a :qt only to show it's possible, and so our internal automated
   # tests can test it. In this case it's the same as 
   # config[:default_solr_parameters][:qt], so isn't actually neccesary. 
-  config[:search_fields] << {
-    :key => 'subject', 
-    :qt=> 'search',
-    :solr_parameters => {
-      :"spellcheck.dictionary" => "subject"
-    },
-    :solr_local_parameters => {
-      :qf => "$subject_qf",
-      :pf => "$subject_pf"
-    }
-  }
+  # config[:search_fields] << {
+  #   :key => 'subject', 
+  #   :qt=> 'search',
+  #   :solr_parameters => {
+  #     :"spellcheck.dictionary" => "subject"
+  #   },
+  #   :solr_local_parameters => {
+  #     :qf => "$subject_qf",
+  #     :pf => "$subject_pf"
+  #   }
+  # }
   
   # "sort results by" select (pulldown)
   # label in pulldown is followed by the name of the SOLR field to sort by and
@@ -220,10 +263,14 @@ Blacklight.configure(:shared) do |config|
   # except in the relevancy case).
   # label is key, solr field is value
   config[:sort_fields] ||= []
-  config[:sort_fields] << ['relevance', 'score desc, pub_date_sort desc, title_sort asc']
-  config[:sort_fields] << ['year', 'pub_date_sort desc, title_sort asc']
-  config[:sort_fields] << ['author', 'author_sort asc, title_sort asc']
-  config[:sort_fields] << ['title', 'title_sort asc, pub_date_sort desc']
+  config[:sort_fields] << ['path', 'filename_sort asc']
+  config[:sort_fields] << ['inode', 'inode_i asc']
+  config[:sort_fields] << ['modification time', 'mtime_dt desc']
+  config[:sort_fields] << ['access time', 'atime_dt desc']
+  config[:sort_fields] << ['change time', 'ctime_dt desc']
+  config[:sort_fields] << ['creation time', 'crtime_dt desc']
+  config[:sort_fields] << ['deletion time', 'dtime_dt desc']
+  config[:sort_fields] << ['size', 'filesize_i desc']
   
   # If there are more than this many search results, no spelling ("did you 
   # mean") suggestion is offered.

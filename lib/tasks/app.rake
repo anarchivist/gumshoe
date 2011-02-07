@@ -3,6 +3,7 @@ require 'find'
 require 'rsolr'
 require 'nokogiri'
 require 'fiwalk_mapper'
+require 'curl'
 
 def require_env_file
   raise("The FILE environment variable is required!") if ENV['FILE'].to_s.empty?
@@ -11,10 +12,10 @@ end
 
 namespace :app do
   
-  namespace :index do
+  namespace :image do
     
     desc "Index output from fiwalk"
-    task :fiwalk => :environment do
+    task :index => :environment do
       solr = Blacklight.solr
       #solr = RSolr.connect :url => 'http://localhost:8983/solr'
     
@@ -32,5 +33,18 @@ namespace :app do
       solr.commit
       
     end
+    
+    desc "Download sample disk image from digitalcorpora.org"
+    task :download do
+      FileUtils.mkdir "images" rescue nil
+      curl = Curl::Easy.new
+      curl.url = "http://digitalcorpora.org/corp/images/nps/nps-2009-casper-rw/ubnist1.casper-rw.gen2.aff"
+      curl.perform
+      file = File.new('images/ubnist1.casper-rw.gen2.aff', 'wb')
+      file << curl.body_str
+      file.close
+      puts 'downloaded ubnist1.casper-rw.gen2.aff to images'
+    end
   end
+    
 end

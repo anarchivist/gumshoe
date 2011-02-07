@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'find'
 require 'rsolr'
+require 'rsolr-ext'
 require 'nokogiri'
 require 'fiwalk_mapper'
 require 'curl'
@@ -10,6 +11,8 @@ def require_env_file
   ENV['FILE']
 end
 
+
+
 namespace :app do
   
   namespace :image do
@@ -17,8 +20,6 @@ namespace :app do
     desc "Index output from fiwalk"
     task :index => :environment do
       solr = Blacklight.solr
-      #solr = RSolr.connect :url => 'http://localhost:8983/solr'
-    
       input_file = require_env_file
       if input_file =~ /\*/
         files = Dir[input_file].collect

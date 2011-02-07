@@ -1,5 +1,6 @@
 require 'lib/fiwalk'
 require 'digest/sha1'
+require 'time'
 
 def to_b(v)
   return [true, "true", 1, "1", "T", "t"].include?(v.class == String ? v.downcase : v)
@@ -30,21 +31,25 @@ class FiwalkMapper
     sha.hexdigest
   end
   
+  def unepoch(e)
+    Time.at(e.to_i).utc.iso8601.to_s
+  end
+  
   def get_solr_docs
     docs = []
     @metadata.volumes.each do |volume|
       volume.fileobjects.each do |fileobject|
         docs << {
-          :atime_dt => Time.at(fileobject.atime.to_i),
+          :atime_dt => unepoch(fileobject.atime),
           :compressed_b => to_b(fileobject.compressed),
           #:contents_display
           #:contents_t
-          :crtime_dt => Time.at(fileobject.crtime.to_i),
-          :ctime_dt => Time.at(fileobject.ctime.to_i),
-          :dtime_dt => Time.at(fileobject.dtime.to_i),
+          :crtime_dt => unepoch(fileobject.crtime),
+          :ctime_dt => unepoch(fileobject.ctime),
+          :dtime_dt => unepoch(fileobject.dtime),
           :encrypted_b => to_b(fileobject.encrypted), 
           #:extension_facet': fo.ext(),
-          :fileid_i => fileobject.id.to_i,
+          :fileid_i => fileobject.fileid.to_i,
           :filename_display => fileobject.filename.to_s,
           :filename_t => fileobject.filename.to_s,
           :filesize_i => fileobject.filesize.to_i,
@@ -57,10 +62,10 @@ class FiwalkMapper
           :libmagic_display => fileobject.libmagic,
           :libmagic_facet => fileobject.libmagic,
           :md5_s => fileobject.md5,
-          :meta_type_i => fileobject.md5,
+          :meta_type_i => fileobject.meta_type,
           :mode_facet => fileobject.mode,
           :mode_s => fileobject.mode,
-          :mtime_dt => Time.at(fileobject.mtime.to_i),
+          :mtime_dt => unepoch(fileobject.mtime),
           :nlink_i => fileobject.nlink.to_i,
           :name_type_s => fileobject.name_type,
           :partition_i => fileobject.partition.to_i,

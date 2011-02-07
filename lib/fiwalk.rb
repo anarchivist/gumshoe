@@ -19,7 +19,7 @@ class FileObject
   element :filesize
   element :fragments
   element :gid
-  element :id
+  element :id, :as => :fileid
   element :inode
   element :libmagic
   element :meta_type

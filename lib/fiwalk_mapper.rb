@@ -41,9 +41,13 @@ class FiwalkMapper
   
   def initialize(doc_path)
     @filename = doc_path
-    @file_id = val_to_id File.basename(doc_path, '.xml')
-    raw = File.read doc_path
-    raw.to_s.gsub(/\n+|\t+/, '').gsub(/ +/, ' ').strip
+    if File.extname(doc_path) == '.xml'
+      raw = File.read doc_path
+      raw.to_s.gsub(/\n+|\t+/, '').gsub(/ +/, ' ').strip
+    else
+      raw = %x[fiwalk -fx #{doc_path}]
+    end
+    @file_id = val_to_id File.basename(doc_path, '.*')
     @metadata = Fiwalk.parse(raw)
   end
   

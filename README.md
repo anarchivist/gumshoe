@@ -41,4 +41,4 @@ Start Gumshoe:
 
 	$ script/server
 
-Open your browser to http://localhost:3000/
+Open your browser to http://localhost:3000/ and start playing!

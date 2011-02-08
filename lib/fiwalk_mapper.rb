@@ -71,7 +71,7 @@ class FiwalkMapper
     docs = []
     @metadata.volumes.each do |volume|
       volume.fileobjects.each do |fileobject|
-        docs << {
+        doc = {
           :atime_dt => unepoch(fileobject.atime),
           :compressed_b => to_b(fileobject.compressed),
           #:contents_display
@@ -108,6 +108,8 @@ class FiwalkMapper
           :volume_display => @file_id,
           :volume_facet => @file_id
         }
+        doc[:text] = doc.values.join ' '
+        docs << doc
       end
     end
     docs

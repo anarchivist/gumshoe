@@ -6,14 +6,14 @@ Gumshoe is a Rails-based application for searching metadata from disk images. It
 Dependencies
 ============
 
-In addition to Ruby and Rails, you'll need to install fiwalk. If you're on a Mac and use [Homebrew](http://github.com/mxcl/homebrew), you can install it using `brew install fiwalk`.
+In addition to Ruby, rubygems, and Rails, you'll need to install fiwalk. If you're on a Mac and use [Homebrew](http://github.com/mxcl/homebrew), you can install it using `brew install fiwalk`.
 
 Getting Started
 ===============
 
 To get started, you'll need to to get a git clone of the codebase:
 
-	$ git clone git://github.com/anarchivist/gumshoe.git`
+	$ git clone git://github.com/anarchivist/gumshoe.git
 
 Then pull in the Solr/Jetty bundle:
 

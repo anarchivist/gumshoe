@@ -38,14 +38,17 @@ class FiwalkMapper
   attr :filename
   attr :file_id
   attr :metadata
+  attr :from_image
   
   def initialize(doc_path)
     @filename = doc_path
     if File.extname(doc_path) == '.xml'
       raw = File.read doc_path
       raw.to_s.gsub(/\n+|\t+/, '').gsub(/ +/, ' ').strip
+      @from_image = false
     else
       raw = %x[fiwalk -fx #{doc_path}]
+      @from_image = true
     end
     @file_id = val_to_id File.basename(doc_path, '.*')
     @metadata = Fiwalk.parse(raw)
@@ -65,6 +68,10 @@ class FiwalkMapper
   
   def unepoch(e)
     Time.at(e.to_i).utc.iso8601.to_s
+  end
+  
+  def contents fobj
+    %x[icat #{@filename} #{fobj.inode}]
   end
   
   def get_solr_docs

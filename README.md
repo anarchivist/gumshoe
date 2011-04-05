@@ -35,7 +35,7 @@ Download the sample image:
 
 Extract and index the metadata from the sample image:
 
-	$ rake app:index:image FILE=images/ubnist1.casper-rw.gen2.aff
+	$ rake app:image:index FILE=images/ubnist1.casper-rw.gen2.aff
 	
 Start Gumshoe:
 

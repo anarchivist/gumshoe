@@ -13,3 +13,6 @@ solr_marc/solrmarc.log
 *.log
 images
 images/*
+db/development.sqlite3
+log/development.log
+log/production.log

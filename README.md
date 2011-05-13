@@ -31,11 +31,11 @@ Start up Solr:
 
 Download the sample image:
 
-	$ rake app:image:download
+	$ rake gumshoe:image:download
 
 Extract and index the metadata from the sample image:
 
-	$ rake app:image:index FILE=images/ubnist1.casper-rw.gen2.aff
+	$ rake gumshoe:image:index FILE=images/ubnist1.casper-rw.gen2.aff
 	
 Start Gumshoe:
 

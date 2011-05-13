@@ -13,7 +13,7 @@ end
 
 
 
-namespace :app do
+namespace :gumshoe do
   
   namespace :image do
     

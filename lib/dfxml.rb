@@ -48,7 +48,7 @@ class Volume
   elements :fileobject, :as => :fileobjects, :class => FileObject
 end
 
-class Fiwalk
+class DFXML
   include SAXMachine
   element :metadata # needs work
   element :creator  # needs work

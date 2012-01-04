@@ -1,4 +1,4 @@
-require 'lib/fiwalk'
+require 'lib/dfxml'
 require 'digest/sha1'
 require 'time'
 
@@ -34,7 +34,7 @@ def ftype t
   Ftypes[t]
 end
 
-class FiwalkMapper
+class DFXMLMapper
   attr :filename
   attr :file_id
   attr :metadata
@@ -51,7 +51,7 @@ class FiwalkMapper
       @from_image = true
     end
     @file_id = val_to_id File.basename(doc_path, '.*')
-    @metadata = Fiwalk.parse(raw)
+    @metadata = DFXML.parse(raw)
   end
   
   def val_to_id(v)
@@ -79,13 +79,13 @@ class FiwalkMapper
     @metadata.volumes.each do |volume|
       volume.fileobjects.each do |fileobject|
         doc = {
-          :atime_dt => unepoch(fileobject.atime),
+          :atime_dt => fileobject.atime,
           :compressed_b => to_b(fileobject.compressed),
           #:contents_display
           #:contents_t
-          :crtime_dt => unepoch(fileobject.crtime),
-          :ctime_dt => unepoch(fileobject.ctime),
-          :dtime_dt => unepoch(fileobject.dtime),
+          :crtime_dt => fileobject.crtime,
+          :ctime_dt => fileobject.ctime,
+          :dtime_dt => fileobject.dtime,
           :encrypted_b => to_b(fileobject.encrypted), 
           :extension_facet => ext(fileobject.filename),
           :fileid_i => fileobject.fileid.to_i,
@@ -104,7 +104,7 @@ class FiwalkMapper
           :meta_type_i => fileobject.meta_type,
           :mode_facet => fileobject.mode,
           :mode_s => fileobject.mode,
-          :mtime_dt => unepoch(fileobject.mtime),
+          :mtime_dt => fileobject.mtime,
           :nlink_i => fileobject.nlink.to_i,
           :name_type_s => ftype(fileobject.name_type),
           :partition_i => fileobject.partition.to_i,

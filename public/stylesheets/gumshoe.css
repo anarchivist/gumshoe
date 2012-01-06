@@ -1,4 +1,4 @@
-html, body, #facets, #facets h2, #facets h3 {background: #white none; font-family: "Arial Unicode MS", Arial, Helvetica, sans-serif; color: black;}
+html, body, #facets, #facets h2, #facets h3 {background: white none; font-family: "Arial Unicode MS", Arial, Helvetica, sans-serif; color: black;}
 html, body {font-size: 12px;}
 #doc, #doc2, #doc3, #doc4, #search, #appliedParams, .show #appliedParams, .pageEntriesInfo, #sortAndPerPage, .pagination, #previousNextDocument {background: white none; border: 0;}
 #doc4.gumshoe {width: 100%;}

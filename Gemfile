@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem 'rails', '2.3.10'
+gem 'rails', '2.3.14'
 gem 'sqlite3-ruby', :group => :development
 #gem 'pg', '0.10.0', :group => :production
 gem 'authlogic', '2.1.2'

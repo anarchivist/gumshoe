@@ -47,7 +47,7 @@ class DFXMLMapper
       raw.to_s.gsub(/\n+|\t+/, '').gsub(/ +/, ' ').strip
       @from_image = false
     else
-      raw = %x[fiwalk -fx #{doc_path}]
+      raw = %x[fiwalk -c config/ficonfig.txt -fx #{doc_path}]
       @from_image = true
     end
     @file_id = val_to_id File.basename(doc_path, '.*')
@@ -110,6 +110,9 @@ class DFXMLMapper
           :partition_i => fileobject.partition.to_i,
           :path_facet => path(fileobject.filename),
           :path_s => '/' + path(fileobject.filename),
+          # :pronom_format_s => fileobject.pronom_format,
+          # :pronom_puid_facet => fileobject.pronom_puid,
+          # :pronom_puid_s => fileobject.pronom_puid,
           :sha1_s => fileobject.sha1,
           :uid_i => fileobject.uid.to_i,
           :volume_display => @file_id,

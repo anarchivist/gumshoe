@@ -34,6 +34,9 @@ class FileObject
   elements :byte_runs, :class => ByteRun
   element :hashdigest, :as => :md5, :with => {:type => "md5"}
   element :hashdigest, :as => :sha1, :with => {:type => "md5"}
+  # elements from fido extractor plugin
+  # element "PUID", :as => :pronom_puid
+  # element "PronomFormat", :as => :pronom_format
 end
 
 class Volume

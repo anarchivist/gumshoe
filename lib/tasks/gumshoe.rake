@@ -14,6 +14,14 @@ end
 
 
 namespace :gumshoe do
+
+  namespace :index do
+    desc "Optimize Solr index"
+    task :optimize => :environment do
+      solr = Blacklight.solr
+      solr.optimize
+    end
+  end
   
   namespace :image do
     
@@ -32,7 +40,6 @@ namespace :gumshoe do
         solr.add mapper.get_solr_docs
       end
       solr.commit
-      
     end
     
     desc "Download sample disk image from digitalcorpora.org"

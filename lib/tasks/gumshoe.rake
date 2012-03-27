@@ -36,7 +36,7 @@ namespace :gumshoe do
       end
       
       files.each_with_index do |f,index|
-        mapper = DFXML::Solrizer.new f
+        mapper = Dfxml::Solrizer.new f
           mapper.get_solr_docs do |d|
             solr.add d
           end

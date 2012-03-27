@@ -1,25 +1,42 @@
 require 'dfxml'
+require 'dfxml/parser'
 require 'nokogiri'
 require 'digest/sha1'
+
+#this is a workaround because i am lazy
+class NilClass
+  def iso8601
+    self
+  end
+end
 
 module Dfxml
   
   class Solrizer
     attr :filename
     attr :file_id
-    attr :reader
     attr :from_image
+    attr :data
     
     def initialize(doc_path)
       @filename = doc_path
       if File.extname(doc_path) == '.xml'
-        @reader = Nokogiri::XML::Reader(doc_path)
         @from_image = false
       else
-        @reader = Nokogiri::XML::Reader(%x[fiwalk -c config/ficonfig.txt -fx #{doc_path}])
+        @data = %x[fiwalk -c config/ficonfig.txt -fx #{doc_path}]
         @from_image = true
       end
       @file_id = val_to_id File.basename(doc_path, '.*')
+    end
+    
+    def ext e
+      return '(None)' if File.extname(e).empty?
+      File.extname(e)
+    end
+    
+    def path p
+       path = p.split('/')
+       path[0..-2].join('/')
     end
     
     def val_to_id(v)
@@ -39,21 +56,26 @@ module Dfxml
     end
     
     def get_solr_docs
-      while @reader.read
-        if @reader.node_type == Nokogiri::XML::Reader::TYPE_ELEMENT and @reader.name == 'fileobject'
-          fileobject = Dfxml::Parser::FileObject.parse(@reader.outer_xml)
+      if @from_image
+        reader = Nokogiri::XML::Reader(@data)
+      else
+        reader = Nokogiri::XML::Reader(File.new(@filename))
+      end
+      while reader.read
+        if reader.node_type == Nokogiri::XML::Reader::TYPE_ELEMENT and reader.name == 'fileobject'
+          fileobject = Dfxml::Parser::FileObject.parse(reader.outer_xml)
           doc = {
             :allocated_b => fileobject.allocated?,
-            :atime_dt => fileobject.atime,
+            :atime_dt => fileobject.atime.iso8601,
             :compressed_b => fileobject.compressed?,
             #:contents_display
             #:contents_t
-            :crtime_dt => fileobject.crtime,
-            :ctime_dt => fileobject.ctime,
-            :dtime_dt => fileobject.dtime,
+            :crtime_dt => fileobject.crtime.iso8601,
+            #:ctime_dt => fileobject.ctime.iso8601,
+            #:dtime_dt => fileobject.dtime.iso8601,
             :encrypted_b => fileobject.encrypted?, 
             :extension_facet => ext(fileobject.filename),
-            :fileid_i => fileobject.fileid.to_i,
+            :fileid_i => fileobject.id_.to_i,
             :filename_display => File.basename(fileobject.filename.to_s),
             :filename_full_display => '/' + fileobject.filename.to_s,
             :filename_sort => '/' + fileobject.filename.to_s,
@@ -69,7 +91,7 @@ module Dfxml
             :meta_type_i => fileobject.meta_type,
             :mode_facet => fileobject.mode,
             :mode_s => fileobject.mode,
-            :mtime_dt => fileobject.mtime,
+            #:mtime_dt => fileobject.mtime.iso8601,
             :nlink_i => fileobject.nlink.to_i,
             :name_type_s => fileobject.type,
             :orphan_b => fileobject.orphan?,

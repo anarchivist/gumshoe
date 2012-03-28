@@ -39,6 +39,6 @@ Extract and index the metadata from the sample image:
 	
 Start Gumshoe:
 
-	$ script/server
+	$ rails s
 
 Open your browser to http://localhost:3000/ and start playing!

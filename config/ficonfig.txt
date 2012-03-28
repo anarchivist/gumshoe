@@ -1,0 +1,6 @@
+#
+# Configuration file for fiwalk
+#
+
+
+# *	dgi	~/bin/fideaux.sh	

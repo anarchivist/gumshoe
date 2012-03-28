@@ -3,8 +3,7 @@ require 'find'
 require 'rsolr'
 require 'rsolr-ext'
 require 'nokogiri'
-require 'dfxml_mapper'
-require 'curl'
+require 'dfxml_solrizer'
 
 def require_env_file
   raise("The FILE environment variable is required!") if ENV['FILE'].to_s.empty?
@@ -36,8 +35,10 @@ namespace :gumshoe do
       end
       
       files.each_with_index do |f,index|
-        mapper = DFXMLMapper.new f
-        solr.add mapper.get_solr_docs
+        mapper = Dfxml::Solrizer.new f
+          mapper.get_solr_docs do |d|
+            solr.add d
+          end
       end
       solr.commit
     end

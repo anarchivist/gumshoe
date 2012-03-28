@@ -1,17 +1,42 @@
-source :gemcutter
+source 'https://rubygems.org'
 
-gem 'rails', '2.3.14'
-gem 'sqlite3-ruby', :group => :development
-#gem 'pg', '0.10.0', :group => :production
-gem 'authlogic', '2.1.2'
-gem 'marc', '0.3.0'
-gem 'will_paginate', '2.3.11'
-gem 'rsolr', '0.12.1'
-gem 'rsolr-ext', '0.12.1'
-gem 'nokogiri'
-gem 'sax-machine'
-gem 'unicode'
-gem 'curb'
-gem 'dfxml', :git => 'git://github.com/anarchivist/dfxml.git'
-gem 'test-unit', '1.2.3'
-gem 'rake', '0.8.7'
+gem 'rails', '3.2.2'
+
+# Bundle edge Rails instead:
+# gem 'rails', :git => 'git://github.com/rails/rails.git'
+
+gem 'sqlite3'
+gem 'blacklight'
+
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer'
+
+  gem 'uglifier', '>= 1.0.3'
+end
+
+gem 'jquery-rails'
+
+# To use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
+
+# To use Jbuilder templates for JSON
+# gem 'jbuilder'
+
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Deploy with Capistrano
+# gem 'capistrano'
+
+# To use debugger
+# gem 'ruby-debug19', :require => 'ruby-debug'
+
+gem "compass-rails", "~> 1.0.0", :group => :assets
+gem "compass-susy-plugin", "~> 0.9.0", :group => :assets

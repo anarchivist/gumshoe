@@ -31,7 +31,7 @@ module Dfxml
     
     def ext e
       return '(None)' if File.extname(e).empty?
-      File.extname(e)
+      File.extname(e).downcase!
     end
     
     def path p

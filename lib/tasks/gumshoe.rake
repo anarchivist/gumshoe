@@ -4,7 +4,6 @@ require 'rsolr'
 require 'rsolr-ext'
 require 'nokogiri'
 require 'dfxml_solrizer'
-require 'curl'
 
 def require_env_file
   raise("The FILE environment variable is required!") if ENV['FILE'].to_s.empty?

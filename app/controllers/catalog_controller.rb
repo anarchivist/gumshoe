@@ -12,7 +12,7 @@ class CatalogController < ApplicationController
     }
 
     # solr field configuration for search results/index views
-    config.index.show_link = 'filename_display'
+    config.index.show_link = 'title_display'
     config.index.record_display_type = 'libmagic_display'
 
     # solr field configuration for document/show views

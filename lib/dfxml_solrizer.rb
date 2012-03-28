@@ -77,6 +77,7 @@ module Dfxml
             :extension_facet => ext(fileobject.filename),
             :fileid_i => fileobject.id_.to_i,
             :filename_display => File.basename(fileobject.filename.to_s),
+            :title_display => '/' + fileobject.filename.to_s,
             :filename_full_display => '/' + fileobject.filename.to_s,
             :filename_sort => '/' + fileobject.filename.to_s,
             :filename_t => '/' + fileobject.filename.to_s,

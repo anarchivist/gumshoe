@@ -40,3 +40,5 @@ gem 'jquery-rails'
 
 gem "compass-rails", "~> 1.0.0", :group => :assets
 gem "compass-susy-plugin", "~> 0.9.0", :group => :assets
+
+gem "dfxml", :git => "git://github.com/anarchivist/dfxml.git"

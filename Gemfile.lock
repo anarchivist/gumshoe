@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/anarchivist/dfxml.git
+  revision: 961364db3577df27bfbbb5718080a5c665aa7b70
+  specs:
+    dfxml (0.1.0)
+      nokogiri (~> 1.5.0)
+      sax-machine
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -115,6 +123,8 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    sax-machine (0.1.0)
+      nokogiri (> 0.0.0)
     sprockets (2.1.2)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -139,6 +149,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   compass-rails (~> 1.0.0)
   compass-susy-plugin (~> 0.9.0)
+  dfxml!
   jquery-rails
   rails (= 3.2.2)
   sass-rails (~> 3.2.3)

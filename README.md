@@ -24,6 +24,10 @@ Get the application's gems:
 
 	$ bundle install
 	
+Migrate database:
+
+  $ rake db:migrate
+
 Start up Solr:
 
 	$ cd jetty

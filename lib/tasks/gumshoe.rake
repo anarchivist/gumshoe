@@ -47,7 +47,7 @@ namespace :gumshoe do
     task :download do
       FileUtils.mkdir "images" rescue nil
       curl = Curl::Easy.new
-      curl.url = "http://digitalcorpora.org/corp/images/nps/nps-2009-casper-rw/ubnist1.casper-rw.gen2.aff"
+      curl.url = "http://digitalcorpora.org/corp/nps/drives/nps-2009-casper-rw/ubnist1.casper-rw.gen2.aff"
       curl.perform
       file = File.new('images/ubnist1.casper-rw.gen2.aff', 'wb')
       file << curl.body_str

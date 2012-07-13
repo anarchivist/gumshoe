@@ -10,17 +10,26 @@ def require_env_file
   ENV['FILE']
 end
 
+namespace :solr do
 
+  desc "Optimize Solr index"
+  task :optimize => :environment do
+    solr = Blacklight.solr
+    solr.optimize
+  end
+
+  desc "Clear all records from Solr index"
+  task :clear => :environment do
+    solr = Blacklight.solr
+    puts 'Clearing and optimizing Solr index'
+    solr.delete_by_query '*:*'
+    solr.commit
+    solr.optimize
+  end
+
+end
 
 namespace :gumshoe do
-
-  namespace :index do
-    desc "Optimize Solr index"
-    task :optimize => :environment do
-      solr = Blacklight.solr
-      solr.optimize
-    end
-  end
   
   namespace :image do
     
@@ -33,7 +42,7 @@ namespace :gumshoe do
       else
         files = [input_file]
       end
-      
+
       files.each_with_index do |f,index|
         mapper = Dfxml::Solrizer.new f
           mapper.get_solr_docs do |d|
@@ -55,5 +64,4 @@ namespace :gumshoe do
       puts 'downloaded ubnist1.casper-rw.gen2.aff to images'
     end
   end
-    
 end

@@ -8,7 +8,6 @@ gem 'rails', '~> 3.2.8'
 gem 'sqlite3'
 gem 'blacklight', '~> 3.7'
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -41,5 +40,8 @@ gem 'jquery-rails'
 gem "compass-rails", "~> 1.0.0", :group => :assets
 gem "compass-susy-plugin", "~> 0.9.0", :group => :assets
 
+# Application-specific gems
+
 gem "dfxml", :git => "git://github.com/anarchivist/dfxml.git"
 gem "curb"
+gem "devise-guests"

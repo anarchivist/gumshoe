@@ -1,9 +1,9 @@
 Gumshoe::Application.routes.draw do
-  devise_for :users
+  root :to => "catalog#index"
 
   Blacklight.add_routes(self)
 
-  root :to => "catalog#index"
+  devise_for :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

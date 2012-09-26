@@ -12,6 +12,17 @@ class CatalogController < ApplicationController
       :rows => 10
     }
 
+    ## Default parameters to send on single-document requests to Solr. These settings are the Blackligt defaults (see SolrHelper#solr_doc_params) or 
+    ## parameters included in the Blacklight-jetty document requestHandler.
+    #
+    #config.default_document_solr_params = {
+    #  :qt => 'document',
+    #  ## These are hard-coded in the blacklight 'document' requestHandler
+    #  # :fl => '*',
+    #  # :rows => 1
+    #  # :q => '{!raw f=id v=$id}' 
+    #}
+
     # solr field configuration for search results/index views
     config.index.show_link = 'title_display'
     config.index.record_display_type = 'libmagic_display'
@@ -45,12 +56,18 @@ class CatalogController < ApplicationController
     config.add_facet_field 'libmagic_facet', :label => 'Format'
     config.add_facet_field 'name_type_s', :label => "Type"
 
+
+    # config.add_facet_field 'example_query_facet_field', :label => 'Publish Date', :query => {
+    #    :years_5 => { :label => 'within 5 Years', :fq => "pub_date:[#{Time.now.year - 5 } TO *]" },
+    #    :years_10 => { :label => 'within 10 Years', :fq => "pub_date:[#{Time.now.year - 10 } TO *]" },
+    #    :years_25 => { :label => 'within 25 Years', :fq => "pub_date:[#{Time.now.year - 25 } TO *]" }
+    # }
+
+
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
     # handler defaults, or have no facets.
-    config.default_solr_params[:'facet.field'] = config.facet_fields.keys
-    #use this instead if you don't want to query facets marked :show=>false
-    #config.default_solr_params[:'facet.field'] = config.facet_fields.select{ |k, v| v[:show] != false}.keys
+    config.add_facet_fields_to_solr_request!
 
 
     # solr fields to be displayed in the index (search results) view

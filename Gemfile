@@ -1,21 +1,21 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.8'
+gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-gem 'blacklight', '~> 3.7'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.5'
-  gem 'coffee-rails', '~> 3.2.2'
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
+  # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -35,14 +35,14 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
-
-gem "compass-rails", "~> 1.0.0", :group => :assets
-gem "compass-susy-plugin", "~> 0.9.0", :group => :assets
+# gem 'debugger'
 
 # Application-specific gems
 
+gem "blacklight"
 gem "devise-guests"
 gem "devise"
 gem "dfxml", :git => "git://github.com/anarchivist/dfxml.git"
 gem "curb"
+gem "compass-rails", "~> 1.0.0", :group => :assets
+gem "compass-susy-plugin", "~> 0.9.0", :group => :assets

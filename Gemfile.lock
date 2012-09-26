@@ -156,8 +156,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  blacklight (~> 3.7)
-  coffee-rails (~> 3.2.2)
+  blacklight
+  coffee-rails (~> 3.2.1)
   compass-rails (~> 1.0.0)
   compass-susy-plugin (~> 0.9.0)
   curb
@@ -165,7 +165,7 @@ DEPENDENCIES
   devise-guests
   dfxml!
   jquery-rails
-  rails (~> 3.2.8)
-  sass-rails (~> 3.2.5)
+  rails (= 3.2.8)
+  sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)

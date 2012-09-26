@@ -1,12 +1,12 @@
 module BlacklightHelper
   include Blacklight::BlacklightHelperBehavior
 
-  def version
+  def gumshoe_version
     '0.2.0-alpha'
   end
 
   def application_name
-    'Gumshoe ' + version
+    'Gumshoe ' + gumshoe_version
   end
 
 # Workaround for arrays; problem w/ current show code in BL's application_helper 

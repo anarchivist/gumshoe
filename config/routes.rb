@@ -1,4 +1,6 @@
 Gumshoe::Application.routes.draw do
+  devise_for :users
+
   Blacklight.add_routes(self)
 
   root :to => "catalog#index"

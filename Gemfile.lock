@@ -161,6 +161,7 @@ DEPENDENCIES
   compass-rails (~> 1.0.0)
   compass-susy-plugin (~> 0.9.0)
   curb
+  devise
   devise-guests
   dfxml!
   jquery-rails

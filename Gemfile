@@ -45,3 +45,4 @@ gem "compass-susy-plugin", "~> 0.9.0", :group => :assets
 gem "dfxml", :git => "git://github.com/anarchivist/dfxml.git"
 gem "curb"
 gem "devise-guests"
+gem "devise"

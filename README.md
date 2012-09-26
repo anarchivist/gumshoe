@@ -1,5 +1,5 @@
-Gumshoe 0.1.1
--------------
+Gumshoe
+-------
 
 Gumshoe is a Rails-based application for searching metadata from disk images. It relies on [Blacklight](http://projectblacklight.org/), [Solr](http://lucene.apache.org/), and [fiwalk](http://domex.nps.edu/deep/Fiwalk.html). 
 

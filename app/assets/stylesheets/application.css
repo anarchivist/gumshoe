@@ -23,7 +23,7 @@ html, body {font-size: 12px;}
 #doc, #doc2, #doc3, #doc4, #page, #search, #appliedParams, .show #appliedParams, .pageEntriesInfo, #sortAndPerPage, .pagination, #previousNextDocument {background: white none; border: 0;}
 #doc4.gumshoe {width: 100%;}
 h1.site_title {background-image: url(../images/shoe.png); margin: 0 0;}
-h1.site_title a {padding-left:80px; text-indent: 0;}
+h1.site_title a {padding-left:80px; text-indent: 0; width: 150px;}
 h3.index_title {font-size: 100%;}
 dl.defList dd {width: 400px;}
 a, a:link, a:active, a:visited {

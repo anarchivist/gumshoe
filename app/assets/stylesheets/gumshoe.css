@@ -1,0 +1,26 @@
+html, body, #facets, #facets h2, #facets h3 {background: white none; font-family: "Arial Unicode MS", Arial, Helvetica, sans-serif; color: black;}
+html, body {font-size: 12px;}
+#doc, #doc2, #doc3, #doc4, #page, #search, #appliedParams, .show #appliedParams, .pageEntriesInfo, #sortAndPerPage, .pagination, #previousNextDocument {background: white none; border: 0;}
+#doc4.gumshoe {width: 100%;}
+h1.site_title {background-image: url(../images/shoe.png); margin: 0 0;  width: auto;}
+h1.site_title a {padding-left:80px; text-indent: 0; width: auto;}
+h3.index_title {font-size: 100%;}
+dl.defList dd {width: 400px;}
+a, a:link, a:active, a:visited {
+color: #029;
+}
+a:hover, #facets li a:hover {color: #920; background:transparent;}
+.ui-widget {font-family: "Arial Unicode MS", Arial, Helvetica, sans-serif;}
+.ui-widget-header {
+border: 1px solid #4C84C6;
+background: #029 none;
+color: white;
+font-weight: bold;
+}
+
+#startOverLink {background: #029 none; border:1px solid #35a;
+-moz-border-radius:15px 15px 15px 15px;
+-webkit-border-radius:15px 15px 15px 15px;
+border-radius: 15px 15px 15px 15px;
+color: #fff;
+padding: 0 1.5em;}

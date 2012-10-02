@@ -42,7 +42,7 @@ gem 'jquery-rails'
 gem "blacklight"
 gem "devise-guests"
 gem "devise"
-gem "dfxml", :git => "git://github.com/anarchivist/dfxml.git"
+gem "dfxml", :git => "git://github.com/anarchivist/dfxml.git", :branch => "plugins"
 gem "curb"
 gem "compass-rails", "~> 1.0.0", :group => :assets
 gem "compass-susy-plugin", "~> 0.9.0", :group => :assets

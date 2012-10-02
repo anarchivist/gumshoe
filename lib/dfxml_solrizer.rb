@@ -40,7 +40,7 @@ module Dfxml
     end
     
     def val_to_id(v)
-      v.downcase.gsub('\s+', '_').gsub(/\W+/, '_').gsub(/ /, '_').gsub(/\.xml/, '').gsub(/^ +| $/, '')
+      v.downcase.gsub('\s+', '_').gsub('.', '-').gsub(/\W+/, '_').gsub(/ /, '_').gsub(/\.xml/, '').gsub(/^ +| $/, '')
     end
     
     def shaify(v, w)
@@ -71,8 +71,8 @@ module Dfxml
             #:contents_display
             #:contents_t
             :crtime_dt => fileobject.crtime.iso8601,
-            #:ctime_dt => fileobject.ctime.iso8601,
-            #:dtime_dt => fileobject.dtime.iso8601,
+            :ctime_dt => fileobject.ctime.iso8601,
+            :dtime_dt => fileobject.dtime.iso8601,
             :encrypted_b => fileobject.encrypted?, 
             :extension_facet => ext(fileobject.filename),
             :fileid_i => fileobject.id_.to_i,
@@ -99,9 +99,12 @@ module Dfxml
             :partition_i => fileobject.partition.to_i,
             :path_facet => path(fileobject.filename),
             :path_s => '/' + path(fileobject.filename),
-            # :pronom_format_s => fileobject.pronom_format,
-            # :pronom_puid_facet => fileobject.pronom_puid,
-            # :pronom_puid_s => fileobject.pronom_puid,
+            :pronom_format_display => fileobject.pronom_format,
+            :pronom_puid_facet => fileobject.pronom_puid,
+            :pronom_puid_s => fileobject.pronom_puid,
+            :pronom_mime_type_facet => fileobject.pronom_mime_type,
+            :pronom_mime_type_s => fileobject.pronom_mime_type,
+            :virus_found_b => fileobject.virus_found,
             :sha1_s => fileobject.sha1,
             :uid_i => fileobject.uid.to_i,
             :used_b => fileobject.used?,

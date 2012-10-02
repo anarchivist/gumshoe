@@ -51,10 +51,13 @@ class CatalogController < ApplicationController
     #
     # :show may be set to false if you don't want the facet to be drawn in the 
     # facet bar
-    config.add_facet_field 'volume_facet', :label => 'Disk Image' 
-    config.add_facet_field 'extension_facet', :label => 'Extension' 
-    config.add_facet_field 'libmagic_facet', :label => 'Format'
+    config.add_facet_field 'volume_facet', :label => 'Disk Image', :limit => 10
+    config.add_facet_field 'extension_facet', :label => 'Extension', :limit => 10
+    config.add_facet_field 'pronom_puid_facet', :label => 'PUID', :limit => 10
+    config.add_facet_field 'pronom_mime_type_facet', :label => 'MIME Type', :limit => 10
+    #config.add_facet_field 'libmagic_facet', :label => 'Format'
     config.add_facet_field 'name_type_s', :label => "Type"
+    config.add_facet_field 'virus_found_b', :label => "Virus Found"
 
 
     # config.add_facet_field 'example_query_facet_field', :label => 'Publish Date', :query => {
@@ -79,12 +82,13 @@ class CatalogController < ApplicationController
     config.add_index_field 'filesize_i', :label => 'Size (bytes)' 
     config.add_index_field 'md5_s', :label => 'MD5'
     config.add_index_field 'sha1_s', :label => 'SHA1'
-    config.add_index_field 'libmagic_display', :label => 'Format (libmagic)'
+    config.add_index_field 'pronom_format_display', :label => 'Format (PRONOM)'
     config.add_index_field 'mtime_dt', :label => 'Modification Time'
     config.add_index_field 'atime_dt', :label => 'Access Time'
     config.add_index_field 'ctime_dt', :label => 'Change Time'
     config.add_index_field 'crtime_dt', :label => 'Creation Time'
     config.add_index_field 'dtime_dt', :label => 'Deletion Time'
+    config.add_index_field 'virus_found_b', :label => 'Virus Found?'
     
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display 
@@ -95,15 +99,20 @@ class CatalogController < ApplicationController
     config.add_show_field 'filesize_i', :label => 'Size (bytes)' 
     config.add_show_field 'md5_s', :label => 'MD5'
     config.add_show_field 'sha1_s', :label => 'SHA1'
+    config.add_show_field 'pronom_format_display', :label => 'Format (PRONOM)'
+    config.add_show_field 'pronom_mime_type_s', :label => 'MIME Type'
+    config.add_show_field 'pronom_puid_s', :label => 'PRONOM PUID'
     config.add_show_field 'libmagic_display', :label => 'Format (libmagic)'
     config.add_show_field 'mtime_dt', :label => 'Modification Time'
     config.add_show_field 'atime_dt', :label => 'Access Time'
     config.add_show_field 'ctime_dt', :label => 'Change Time'
     config.add_show_field 'crtime_dt', :label => 'Creation Time'
     config.add_show_field 'dtime_dt', :label => 'Deletion Time'
+    config.add_show_field 'virus_found_b', :label => 'Virus Found?'
     config.add_show_field 'uid_i', :label => 'User ID'
     config.add_show_field 'gid_i', :label => 'Group ID'
     config.add_show_field 'mode_s', :label => 'Mode'
+
     
 
     # "fielded" search configuration. Used by pulldown among other places.
@@ -125,6 +134,7 @@ class CatalogController < ApplicationController
     # since we aren't specifying it otherwise. 
     
     config.add_search_field 'all_fields', :label => 'All Fields'
+    config.add_search_field 'path_s', :label=> 'Path'
     
 
     # Now we see how to over-ride Solr request handler defaults, in this

@@ -16,3 +16,4 @@
 
 # Ignore content of images directory
 /images
+log/development.log

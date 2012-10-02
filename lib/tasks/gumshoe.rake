@@ -18,6 +18,12 @@ namespace :solr do
     solr.optimize
   end
 
+  desc "Commit Solr index"
+  task :commit => :environment do
+    solr = Blacklight.solr
+    solr.commit
+  end
+
   desc "Clear all records from Solr index"
   task :clear => :environment do
     solr = Blacklight.solr
@@ -44,10 +50,16 @@ namespace :gumshoe do
       end
 
       files.each_with_index do |f,index|
-        mapper = Dfxml::Solrizer.new f
+        puts "-- start", f
+        begin
+          mapper = Dfxml::Solrizer.new f
           mapper.get_solr_docs do |d|
             solr.add d
           end
+        rescue
+          puts "-- uh oh", f
+        end
+        puts "-- finish", f
       end
       solr.commit
     end

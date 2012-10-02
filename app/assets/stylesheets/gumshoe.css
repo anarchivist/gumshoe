@@ -24,3 +24,5 @@ font-weight: bold;
 border-radius: 15px 15px 15px 15px;
 color: #fff;
 padding: 0 1.5em;}
+
+#appliedparams .label {display: none;}

@@ -16,3 +16,8 @@
 
 # Ignore content of images directory
 /images
+
+# Ignore don's junk
+/dm
+
+.DS_Store

@@ -41,14 +41,16 @@ namespace :gumshoe do
       else
         files = [input_file]
       end
-      
+      count = 0
       files.each_with_index do |f,index|
         mapper = Dfxml::Solrizer.new f
           mapper.get_solr_docs do |d|
             solr.add d
+            count += 1
           end
       end
       solr.commit
+      puts count.to_s << " records added"
     end
     
     namespace :download do

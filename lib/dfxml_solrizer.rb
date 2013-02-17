@@ -61,18 +61,24 @@ module Dfxml
       else
         reader = Nokogiri::XML::Reader(File.new(@filename))
       end
+      id = 0
       while reader.read
         if reader.node_type == Nokogiri::XML::Reader::TYPE_ELEMENT and reader.name == 'fileobject'
           fileobject = Dfxml::Parser::FileObject.parse(reader.outer_xml)
+          
           doc = {
             :allocated_b => fileobject.allocated?,
-            :atime_dt => fileobject.atime.iso8601,
+            #:atime_dt => fileobject.atime.iso8601,
             :compressed_b => fileobject.compressed?,
-            #:contents_display
-            #:contents_t
-            :crtime_dt => fileobject.crtime.iso8601,
+            #:contents_display,
+            #:contents_t,
+            
+            ##Times
+            #:crtime_dt => fileobject.crtime.iso8601,
             #:ctime_dt => fileobject.ctime.iso8601,
             #:dtime_dt => fileobject.dtime.iso8601,
+            #:mtime_dt => fileobject.mtime.iso8601,
+            
             :encrypted_b => fileobject.encrypted?, 
             :extension_facet => ext(fileobject.filename),
             :fileid_i => fileobject.id_.to_i,
@@ -84,15 +90,15 @@ module Dfxml
             :filesize_i => fileobject.filesize.to_i,
             :fragments_i => fileobject.fragments.to_i,
             :gid_i => fileobject.gid.to_i,
-            :id => shaify(@file_id, fileobject.inode),
+            :id => shaify(fileobject.filename.to_s, fileobject.inode.to_s),
             :inode_i => fileobject.inode.to_i,
-            :libmagic_display => fileobject.libmagic,
-            :libmagic_facet => fileobject.libmagic,
+            #:libmagic_display => fileobject.libmagic,
+            #:libmagic_facet => fileobject.libmagic,
             :md5_s => fileobject.md5,
             :meta_type_i => fileobject.meta_type,
             :mode_facet => fileobject.mode,
             :mode_s => fileobject.mode,
-            #:mtime_dt => fileobject.mtime.iso8601,
+
             :nlink_i => fileobject.nlink.to_i,
             :name_type_s => fileobject.type,
             :orphan_b => fileobject.orphan?,
@@ -108,8 +114,32 @@ module Dfxml
             :volume_display => @file_id,
             :volume_facet => @file_id
           }
+          
+          
+          #process TSK date formats into iso8601
+          if fileobject.atime.iso8601 != nil 
+            doc[:atime_dt] = fileobject.atime.iso8601.gsub(/-\d\d:\d\d$/, "Z")
+          end
+          
+          if fileobject.ctime.iso8601 != nil 
+            doc[:ctime_dt] = fileobject.ctime.iso8601.gsub(/-\d\d:\d\d$/, "Z")
+          end
+          
+          if fileobject.crtime.iso8601 != nil 
+            doc[:crtime_dt] = fileobject.crtime.iso8601.gsub(/-\d\d:\d\d$/, "Z")
+          end
+          
+          if fileobject.dtime.iso8601 != nil 
+            doc[:dtime_dt] = fileobject.dtime.iso8601.gsub(/-\d\d:\d\d$/, "Z")
+          end
+          
+          if fileobject.mtime.iso8601 != nil 
+            doc[:mtime_dt] = fileobject.mtime.iso8601.gsub(/-\d\d:\d\d$/, "Z")
+          end
+
           doc[:text] = doc.values.join ' '
           yield doc
+
         end
       end
     end

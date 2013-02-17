@@ -7,7 +7,7 @@ gem 'rails', '3.2.2'
 
 gem 'sqlite3'
 gem 'blacklight', '~> 3.3.1'
-
+gem 'therubyracer'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -40,6 +40,5 @@ gem 'jquery-rails'
 
 gem "compass-rails", "~> 1.0.0", :group => :assets
 gem "compass-susy-plugin", "~> 0.9.0", :group => :assets
-
-gem "dfxml", :git => "git://github.com/anarchivist/dfxml.git"
+gem "sax-machine"
 gem "curb"

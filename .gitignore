@@ -19,3 +19,5 @@
 
 # Ignore don's junk
 /dm
+
+.DS_Store

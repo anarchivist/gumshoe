@@ -40,7 +40,7 @@ gem 'jquery-rails'
 # Application-specific gems
 
 gem "blacklight"
-gem "devise-guests"
+gem "devise-guests", "~> 0.2"
 gem "devise"
 gem "dfxml", :git => "git://github.com/anarchivist/dfxml.git", :branch => "plugins"
 gem "curb"

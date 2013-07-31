@@ -55,6 +55,10 @@ module Dfxml
       %x[icat #{@filename} #{fobj.inode}]
     end
     
+    def datetime(date)
+      date.nil? ? nil : date.utc.strftime("%Y-%m-%dT%H:%M:%SZ")
+    end
+
     def get_solr_docs
       if @from_image
         reader = Nokogiri::XML::Reader(@data)
@@ -66,13 +70,13 @@ module Dfxml
           fileobject = Dfxml::Parser::FileObject.parse(reader.outer_xml)
           doc = {
             :allocated_b => fileobject.allocated?,
-            :atime_dt => fileobject.atime.iso8601,
+            :atime_dt => datetime(fileobject.atime),
             :compressed_b => fileobject.compressed?,
             #:contents_display
             #:contents_t
-            :crtime_dt => fileobject.crtime.iso8601,
-            :ctime_dt => fileobject.ctime.iso8601,
-            :dtime_dt => fileobject.dtime.iso8601,
+            :crtime_dt => datetime(fileobject.crtime),
+            :ctime_dt => datetime(fileobject.ctime),
+            :dtime_dt => datetime(fileobject.dtime),
             :encrypted_b => fileobject.encrypted?, 
             :extension_facet => ext(fileobject.filename),
             :fileid_i => fileobject.id_.to_i,
@@ -84,7 +88,7 @@ module Dfxml
             :filesize_i => fileobject.filesize.to_i,
             :fragments_i => fileobject.fragments.to_i,
             :gid_i => fileobject.gid.to_i,
-            :id => shaify(@file_id, fileobject.inode),
+            :id => shaify(fileobject.filename.to_s, fileobject.inode.to_s),
             :inode_i => fileobject.inode.to_i,
             :libmagic_display => fileobject.libmagic,
             :libmagic_facet => fileobject.libmagic,
@@ -92,7 +96,7 @@ module Dfxml
             :meta_type_i => fileobject.meta_type,
             :mode_facet => fileobject.mode,
             :mode_s => fileobject.mode,
-            #:mtime_dt => fileobject.mtime.iso8601,
+            :mtime_dt => datetime(fileobject.mtime),
             :nlink_i => fileobject.nlink.to_i,
             :name_type_s => fileobject.type,
             :orphan_b => fileobject.orphan?,

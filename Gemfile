@@ -21,6 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -39,10 +40,12 @@ gem 'jquery-rails'
 
 # Application-specific gems
 
-gem "blacklight"
-gem "devise-guests", "~> 0.2"
+gem "blacklight", "~>4.0"
+gem "unicode"
+gem "devise-guests", "~> 0.3"
 gem "devise"
-gem "dfxml", :git => "git://github.com/anarchivist/dfxml.git", :branch => "plugins"
+gem "dfxml", "~> 0.2.2", :git => "git://github.com/anarchivist/dfxml.git", :branch => "plugins"
+gem "sax-machine", '~> 0.2.0rc1', :git => "git://github.com/pauldix/sax-machine.git" 
 gem "curb"
-gem "compass-rails", "~> 1.0.0", :group => :assets
-gem "compass-susy-plugin", "~> 0.9.0", :group => :assets
+gem "bootstrap-sass"
+gem 'bootswatch-rails'

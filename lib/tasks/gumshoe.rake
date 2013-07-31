@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'find'
 require 'rsolr'
-require 'rsolr-ext'
 require 'nokogiri'
 require 'dfxml_solrizer'
 
@@ -56,8 +55,9 @@ namespace :gumshoe do
           mapper.get_solr_docs do |d|
             solr.add d
           end
-        rescue
+        rescue Exception
           puts "-- uh oh", f
+          puts $!, $@
         end
         puts "-- finish", f
       end

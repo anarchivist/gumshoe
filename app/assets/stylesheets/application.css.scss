@@ -1,0 +1,27 @@
+/*
+ * Required by Blacklight:
+*/
+
+$navbarLinkColor: #000;
+
+@import 'bootswatch/united/variables';
+@import 'bootstrap';
+@import 'bootstrap-responsive';
+@import 'bootswatch/united/bootswatch';
+@import 'blacklight/blacklight';
+
+#header-navbar-fixed-top .brand { background: transparent url('/images/shoe.png') no-repeat top left;}
+
+.util-links-login a, .util-links-other a, .util-links-login a:hover, .util-links-other a:hover { color: black; } 
+
+
+/*
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ *= require 'gumshoe'
+*/
+
